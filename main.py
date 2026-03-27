@@ -11,3 +11,14 @@ class Aluno(Base):
 
     def __repr__(self):
         return f"ID: {self.id} - NOME: {self.nome}"
+    
+class Curso(Base):
+    __tablename__ = "cursos"
+
+    id = Column(Integer,primary_key=True, autoincrement=True)
+    nome = Column(String(100), nullable=False)
+
+    def __repr__(self):
+        return f"ID: {self.id} - CURSO: {self.nome}"
+    
+    

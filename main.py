@@ -91,10 +91,6 @@ def cadastrar_aluno():
 #Listar
 
 
-
-
-
-
 #Atualizar
 def adicionar_curso():
     with Session() as session:
@@ -118,7 +114,7 @@ def adicionar_curso():
         except Exception as erro:
             session.rollback()
             print(f"Ocorreu um erro {erro}")
-adicionar_curso()
+#adicionar_curso()
 
 #Deletar
 

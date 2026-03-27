@@ -89,7 +89,19 @@ def cadastrar_aluno():
 #cadastrar_aluno()
 
 #Listar
+def listar_cursos():
+    with Session() as session:
+        try:
+            todos_cursos= session.query(Curso).all()
+            for curso in todos_cursos:
+                print(f"\n--- Curso {curso.nome} ---")
+                for aluno in curso.alunos:
+                    print(aluno.nome)
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro {erro}")
 
+#listar_cursos()
 
 #Atualizar
 def adicionar_curso():
@@ -118,4 +130,21 @@ def adicionar_curso():
 
 #Deletar
 
-#funcao para buscar um aluno do mesmo jeito que eu busco o curso e depois adicionar o aluno e adicionar em outro curso 
+def deletar_aluno():
+    nome = input("Digite o nome do aluno que deseja deletar: ")
+
+    with Session() as session:
+        try:
+            aluno = session.query(Aluno).filter_by(nome=nome).first()
+            if aluno:
+                session.delete(aluno)
+                session.commit()
+                print(f"Aluno {nome} deletado com sucesso!")
+            else:
+                print("Aluno não encontrado.")
+
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro: {erro}")
+
+deletar_aluno()
